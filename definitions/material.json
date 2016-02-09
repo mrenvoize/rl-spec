@@ -5,43 +5,22 @@
   "properties": {
     "id": {
       "description": "A system assigned ID",
-      "oneOf": [{
-        "type": "integer",
-        "multipleOf": 1
-      }, {
-        "type": "null"
-      }]
+      "type": [ "integer", "null" ]
     },
     "in_stock": {
-      "oneOf": [{
-        "type": "boolean"
-      }, {
-        "type": "null"
-      }]
+      "type": [ "boolean", "null" ]
     },
     "metadata": {
       "$ref": "./csl-data.json"
     },
     "note": {
-      "oneOf": [{
-        "type": "string"
-      }, {
-        "type": "null"
-      }]
+      "type": [ "string", "null" ]
     },
     "owner": {
       "type": "string"
     },
     "owner_uuid": {
-      "oneOf": [{
-        "type": "string"
-      }, {
-        "type": "integer",
-        "multipleOf": 1,
-        "minimum": 1
-      }, {
-        "type": "null"
-      }]
+      "type": [ "string", "integer", "null" ]
     },
     "tags_global": {
       "type": "array",

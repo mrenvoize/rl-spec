@@ -6,12 +6,7 @@
   "properties": {
     "id": {
       "description": "System assigned unique identifier; When POSTing a new list this should be set to 'null'",
-      "anyOf": [{
-        "type": "integer",
-        "multipleOf": 1
-      }, {
-        "type": "null"
-      }]
+      "type": ["integer", "null"]
     },
     "type": {
       "description": "?? NOT ENTIRELY SURE WHAT THIS IS FOR ??",
@@ -24,71 +19,39 @@
     },
     "summary": {
       "description": "A verbose meta-field to describe the list content",
-      "anyOf": [{
-        "type": "string",
-        "minLength": 1
-      }, {
-        "type": "null"
-      }]
+      "type": ["string", "null"],
+      "minLength": 1
     },
     "public_note": {
       "description": "A publically visible list level note",
-      "anyOf": [{
-        "type": "string",
-        "minLength": 1
-      }, {
-        "type": "null"
-      }]
+      "type": ["string", "null"],
+      "minLength": 1
     },
     "private_note": {
       "description": "A buffer visible list level note",
-      "anyOf": [{
-        "type": "string",
-        "minLength": 1
-      }, {
-        "type": "null"
-      }]
+      "type": ["string", "null"],
+      "minLength": 1
     },
     "course_identifier": {
       "description": "A list meta-field, used to help identify the list",
-      "anyOf": [{
-        "type": "string"
-      }, {
-        "type": "null"
-      }]
+      "type": ["string", "null"]
     },
     "year": {
       "description": "A list meta-field used in rollover",
-      "anyOf": [{
-        "type": "integer",
-        "minLength": 4
-      }, {
-        "type": "null"
-      }]
+      "type": ["integer", "null"],
+      "minLength": 4
     },
     "no_students": {
       "description": "Used in conjunction with ratio_books and ration_students to construct purchasing predictions.",
-      "anyOf": [{
-        "type": "integer"
-      }, {
-        "type": "null"
-      }]
+      "type": ["integer", "null"]
     },
     "ratio_books": {
       "description": "Used in conjunction with no_students and ration_students to construct purchasing predictions.",
-      "anyOf": [{
-        "type": "integer"
-      }, {
-        "type": "null"
-      }]
+      "type": ["integer", "null"]
     },
     "ratio_students": {
       "description": "Used in conjunction with ratio_books and no_students to construct purchasing predications.",
-      "anyOf": [{
-        "type": "integer"
-      }, {
-        "type": "null"
-      }]
+      "type": ["integer", "null"]
     },
     "published": {
       "type": "boolean",
@@ -96,21 +59,13 @@
     },
     "validity_start": {
       "description": "Used in conjunction with published state to restrict which lists are publicly available at a given time.",
-      "anyOf": [{
-        "type": "string",
-        "format": "date-time"
-      }, {
-        "type": "null"
-      }]
+      "type": ["string", "null"],
+      "format": "date-time"
     },
     "validity_end": {
       "description": "Used in conjunction with published state to restrict which lists are publicly available at a given time.",
-      "anyOf": [{
-        "type": "string",
-        "format": "date-time"
-      }, {
-        "type": "null"
-      }]
+      "type": ["string", "null"],
+      "format": "date-time"
     },
     "created": {
       "type": "string",
@@ -122,19 +77,11 @@
     },
     "parent_id": {
       "description": "The ID of the lists parent record. Used to construct the taxonomy.",
-      "anyOf": [{
-        "type": "integer"
-      }, {
-        "type": "null"
-      }]
+      "type": ["integer", "null"]
     },
     "source": {
-      "anyOf": [{
-        "type": "string",
-        "minLength": 1
-      }, {
-        "type": "null"
-      }]
+      "type": ["string", "null"],
+      "minLength": 1
     },
     "moderating": {
       "type": "boolean"
@@ -146,7 +93,7 @@
       "description": "suedo field to show current users roles on the list",
       "type": "array",
       "items": {
-          "type": "string"
+        "type": "string"
       }
     },
     "material_count": {

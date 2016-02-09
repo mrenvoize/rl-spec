@@ -1,12 +1,5 @@
 {
-    "title": "rebus:list - resource id",
-    "description": "A system generated read-only field for identifying a resource",
-    "oneOf": [{
-        "type": "integer",
-        "multipleOf": 1,
-        "minimum": 1
-    }, {
-        "type": "null"
-    }]
+  "title": "rebus:list - resource id",
+  "description": "A system generated read-only field for identifying a resource",
+  "type": ["integer", "null"]
 }
-

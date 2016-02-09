@@ -8,13 +8,7 @@
       "type": "boolean"
     },
     "system_role": {
-      "oneOf": [{
-        "type": "string"
-      }, {
-        "type": "integer"
-      }, {
-        "type": "null"
-      }]
+      "type": ["string", "integer", "null"]
     },
     "list_roles": {
       "type": "array",
@@ -32,11 +26,7 @@
       "$ref": "./rebus-id.json"
     },
     "password": {
-      "oneOf": [{
-        "type": "string"
-      }, {
-        "type": "null"
-      }]
+      "type": ["string", "null"]
     }
   },
   "required": [

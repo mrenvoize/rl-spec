@@ -1,0 +1,30 @@
+{
+  "title": "rebus:list - list_role",
+  "description": "The list_role schema for rebus:list",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "./rebus-id.json"
+    },
+    "name": {
+      "description": "Enter role name here",
+      "type": "string"
+    },
+    "type": {
+      "description": "Role type",
+      "enum": [
+        "system",
+        "list"
+      ]
+    },
+    "privileges": {
+      "$ref": "./privilege.json"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "name",
+    "type"
+  ]
+}

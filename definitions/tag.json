@@ -1,31 +1,27 @@
 {
-    "title": "rebus:list - tag",
-    "description": "The tag schema for rebus:list; used for creation and update of tag objects.",
-    "type": "object",
-    "properties": {
-        "id": {
-            "$ref": "./rebus-id.json"
-        },
-        "text": {
-            "description": "Enter tag content here",
-            "type": "string",
-            "minLength": 1,
-            "pattern": "^\\S.*\\S$"
-        },
-        "list": {
-            "oneOf": [{
-                "type": "integer"
-            }, {
-                "type": "null"
-            }]
-        },
-        "occurrences": {
-            "type": "integer"
-        }
+  "title": "rebus:list - tag",
+  "description": "The tag schema for rebus:list; used for creation and update of tag objects.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "./rebus-id.json"
     },
-    "additionalProperties": false,
-    "required": [
-        "id",
-        "text"
-    ]
+    "text": {
+      "description": "Enter tag content here",
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^\\S.*\\S$"
+    },
+    "list": {
+      "type": ["integer", "null"]
+    },
+    "occurrences": {
+      "type": "integer"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "text"
+  ]
 }
