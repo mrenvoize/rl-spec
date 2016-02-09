@@ -1,0 +1,13 @@
+{
+    "rebus-id": { "$ref":"./rebus-id.json" },
+    "list": { "$ref":"./list.json" },
+    "user": { "$ref":"./user.json" },
+    "role": { "$ref":"./role.json" },
+    "category": { "$ref":"./category.json" },
+    "tag": { "$ref":"./tag.json" },
+    "material": { "$ref":"./material.json" },
+    "csl-data": { "$ref":"./csl-data.json" },
+    "preference": { "$ref":"./preference.json"},
+    "error": { "$ref":"./error.json" },
+    "headers": { "$ref":"./headers/index.json" }
+}

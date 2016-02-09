@@ -1,0 +1,25 @@
+{
+  "title": "rebus:list - privilege",
+  "description": "The privilege schema for rebus:list; used for creation and update of privilege objects.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "./rebus-id.json"
+    },
+    "name": {
+      "description": "Enter role name here",
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "global": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "name"
+  ]
+}

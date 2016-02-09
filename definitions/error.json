@@ -1,0 +1,26 @@
+{
+    "type": "object",
+    "properties": {
+        "valid": {
+            "type": "boolean"
+        },
+        "errors": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "path": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "id": "string"
+                    }
+                }
+            }
+        }
+    },
+    "required": [
+        "errors",
+        "valid"
+    ]
+}

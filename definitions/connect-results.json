@@ -1,0 +1,27 @@
+{
+  "type": "object",
+  "title": "rebus:connect - results",
+  "properties": {
+    "start_set": {
+      "type": "integer"
+    },
+    "end_set": {
+      "type": "integer"
+    },
+    "no_entries": {
+      "type": "integer"
+    },
+    "search_results": {
+      "type": "array",
+      "items": {
+        "$ref": "./connect-material.json"
+      }
+    }
+  },
+  "required": [
+    "start_set",
+    "end_set",
+    "no_entries",
+    "search_results"
+  ]
+}

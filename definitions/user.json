@@ -1,0 +1,46 @@
+{
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string"
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "system_role": {
+      "oneOf": [{
+        "type": "string"
+      }, {
+        "type": "integer"
+      }, {
+        "type": "null"
+      }]
+    },
+    "list_roles": {
+      "type": "array",
+      "items": {
+        "$ref": "./role.json"
+      }
+    },
+    "name": {
+      "type": "string"
+    },
+    "login": {
+      "type": "string"
+    },
+    "id": {
+      "$ref": "./rebus-id.json"
+    },
+    "password": {
+      "oneOf": [{
+        "type": "string"
+      }, {
+        "type": "null"
+      }]
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "additionalProperties": false
+}

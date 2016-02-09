@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "title": "rebus:list - preference",
+  "description": "A preference within a rebus:list list",
+  "properties": {
+    "preference": {
+      "description": "Preference code",
+      "type": "string",
+      "minLength": 1
+    },
+    "value": {
+      "description": "Preference value"
+    },
+    "json_schema": {
+      "$ref": "http://json-schema.org/schema"
+    },
+    "json_form": {
+      "description": "Preference form",
+      "type": "array"
+    }
+  },
+  "required": ["preference", "value"]
+}

@@ -1,0 +1,2285 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is the swagger specification file for the rebusl:list 2.0 api.",
+    "version": "1.0.0",
+    "title": "rebus:list 2.0",
+    "termsOfService": "http://rebuslist.com/terms/",
+    "contact": {
+      "name": "hosting@ptfs-europe.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "213.138.108.9:3000",
+  "basePath": "/api",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json",
+    "application/xml"
+  ],
+  "produces": [
+    "application/json",
+    "application/xml"
+  ],
+  "x-mojo-around-action": "Rebus::authorize",
+  "paths": {
+    "/buffers/{list-id}": {
+      "get": {
+        "operationId": "readBuffer",
+        "summary": "Fetch a buffer",
+        "description": "Fetch a buffer",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "list-edit"
+        ],
+        "parameters": [{
+          "name": "list-id",
+          "in": "path",
+          "description": "ID of list to fetch",
+          "required": true,
+          "type": "integer"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/list"
+            },
+            "headers": {
+              "$ref": "#/definitions/headers/buffer"
+            }
+          },
+          "201": {
+            "description": "OK - Created",
+            "schema": {
+              "$ref": "#/definitions/list"
+            },
+            "headers": {
+              "$ref": "#/definitions/headers/buffer"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "patchBuffer",
+        "summary": "Alter a buffer",
+        "description": "Alter a buffer",
+        "x-patched-schema": {
+          "$ref": "#/definitions/list"
+        },
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "list-edit"
+        ],
+        "parameters": [{
+          "name": "list-id",
+          "in": "path",
+          "description": "ID of list to fetch",
+          "required": true,
+          "type": "integer"
+        }, {
+          "name": "data",
+          "in": "body",
+          "description": "Patch a buffer",
+          "required": true,
+          "schema": {
+            "$ref": "http://json.schemastore.org/json-patch"
+          }
+        }, {
+          "name": "X-Version",
+          "in": "header",
+          "description": "Buffer version",
+          "required": true,
+          "type": "integer"
+        }],
+        "responses": {
+          "204": {
+            "description": "OK",
+            "headers": {
+              "$ref": "#/definitions/headers/buffer"
+            }
+          },
+          "226": {
+            "description": "OK",
+            "schema": {
+              "$ref": "http://json.schemastore.org/json-patch"
+            },
+            "headers": {
+              "$ref": "#/definitions/headers/buffer"
+            }
+          },
+          "400": {
+            "description": "Client error",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          },
+          "409": {
+            "description": "Conflicting version change",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          },
+          "423": {
+            "description": "Resource locked",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteBuffer",
+        "summary": "Reset a buffer",
+        "description": "Reset a buffer",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "list-edit"
+        ],
+        "parameters": [{
+          "name": "list-id",
+          "in": "path",
+          "description": "ID of list to fetch",
+          "required": true,
+          "type": "integer"
+        }],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          },
+          "423": {
+            "description": "Locked",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          }
+        }
+      }
+    },
+    "/buffers/{list-id}/lock": {
+      "put": {
+        "operationId": "lockBuffer",
+        "summary": "Unlock a buffer",
+        "description": "Unlock a buffer",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "list-edit"
+        ],
+        "parameters": [{
+          "name": "list-id",
+          "in": "path",
+          "description": "ID of list to fetch",
+          "required": true,
+          "type": "integer"
+        }],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          },
+          "423": {
+            "description": "Resource locked",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "unlockBuffer",
+        "summary": "Unlock a buffer",
+        "description": "Unlock a buffer",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "list-edit"
+        ],
+        "parameters": [{
+          "name": "list-id",
+          "in": "path",
+          "description": "ID of list to fetch",
+          "required": true,
+          "type": "integer"
+        }],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          },
+          "423": {
+            "description": "Resource locked",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          }
+        }
+      }
+    },
+    "/buffers/{list-id}/moderate": {
+      "put": {
+        "operationId": "moderateBuffer",
+        "summary": "Publish a buffer",
+        "description": "Publish a buffer",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "list-edit"
+        ],
+        "parameters": [{
+          "name": "list-id",
+          "in": "path",
+          "description": "ID of list to fetch",
+          "required": true,
+          "type": "integer"
+        }],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "423": {
+            "description": "Resource locked",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "refuseBuffer",
+        "summary": "Publish a buffer",
+        "description": "Publish a buffer",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "list-publish"
+        ],
+        "parameters": [{
+          "name": "list-id",
+          "in": "path",
+          "description": "ID of list to fetch",
+          "required": true,
+          "type": "integer"
+        }],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "423": {
+            "description": "Resource locked",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          }
+        }
+      }
+    },
+    "/buffers/{list-id}/publish": {
+      "put": {
+        "operationId": "publishBuffer",
+        "summary": "Publish a buffer",
+        "description": "Publish a buffer",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "list-publish"
+        ],
+        "parameters": [{
+          "name": "list-id",
+          "in": "path",
+          "description": "ID of list to fetch",
+          "required": true,
+          "type": "integer"
+        }],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Fobidden",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          },
+          "423": {
+            "description": "Resource locked",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          },
+          "500": {
+            "description": "Explosion",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          }
+        }
+      }
+    },
+    "/configs": {
+      "get": {
+        "operationId": "readConfig",
+        "summary": "",
+        "description": "Configs route",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/configs/{config-code}": {
+      "get": {
+        "operationId": "getConfig",
+        "summary": "",
+        "description": "",
+        "parameters": [{
+          "name": "config-code",
+          "in": "path",
+          "description": "ID of list to fetch",
+          "required": true,
+          "type": "integer"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/covers/{isbn}": {
+      "get": {
+        "operationId": "getCover",
+        "summary": "",
+        "description": "",
+        "parameters": [{
+          "name": "material-id",
+          "in": "path",
+          "description": "ID of list to fetch",
+          "required": true,
+          "type": "integer"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/lists": {
+      "post": {
+        "operationId": "createList",
+        "summary": "Add a new list to the hierarchy",
+        "description": "Add a new list to the hierarchy",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "list-create"
+        ],
+        "parameters": [{
+          "name": "data",
+          "in": "body",
+          "description": "List object that needs to be added to the store",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/list"
+          }
+        }],
+        "x-rebus-required": [
+          "no_students",
+          "ratio_books",
+          "ratio_students",
+          "published",
+          "validity_start",
+          "validity_end"
+        ],
+        "responses": {
+          "201": {
+            "description": "List created",
+            "schema": {
+              "$ref": "#/definitions/list"
+            },
+            "headers": {
+              "Location": {
+                "description": "Location header",
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "Client Error",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          },
+          "403": {
+            "description": "Insufficient priviledge",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "readLists",
+        "summary": "Fetch a list",
+        "description": "Fetch a list",
+        "parameters": [{
+          "name": "has-stakeholders",
+          "in": "query",
+          "description": "List of stakeholder user-id's to filter material by",
+          "required": false,
+          "type": "array",
+          "collectionFormat": "csv",
+          "items": {
+            "type": "integer"
+          }
+        }, {
+          "name": "embed",
+          "in": "query",
+          "description": "List of related objects to embed",
+          "required": false,
+          "type": "array",
+          "collectionFormat": "csv",
+          "items": {
+            "type": "string",
+            "enum": [
+              "categories",
+              "categories.materials",
+              "categories.materials.tags",
+              "users",
+              "users.list_roles",
+              "ancestors",
+              "descendants"
+            ]
+          }
+        }, {
+          "name": "inheritance",
+          "in": "query",
+          "description": "optionally set inheritance, true by default",
+          "required": false,
+          "type": "boolean"
+        }, {
+          "name": "user-roles",
+          "in": "query",
+          "description": "filter lists on roles this user has upon them",
+          "required": false,
+          "type": "array",
+          "collectionFormat": "csv",
+          "items": {
+            "type": "string"
+          }
+        }, {
+          "name": "any-material",
+          "in": "query",
+          "description": "filter lists on whether they contain material or not",
+          "required": false,
+          "type": "boolean"
+        }, {
+          "name": "has-materials",
+          "in": "query",
+          "description": "filter lists on whether they contain any of the materials listed",
+          "required": false,
+          "type": "array",
+          "collectionFormat": "csv",
+          "items": {
+            "type": "integer"
+          }
+        }, {
+          "name": "fields",
+          "in": "query",
+          "description": "optionally limit which fields are returned",
+          "required": false,
+          "type": "array",
+          "collectionFormat": "csv",
+          "items": {
+            "type": "string",
+            "enum": [
+              "FIXME"
+            ]
+          }
+        }, {
+          "name": "descendant_levels",
+          "in": "query",
+          "description": "Optional limit on number of hierarchy levels to embed",
+          "required": false,
+          "type": "integer"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "X-Total-Count": {
+                "description": "Total number of results - This may eventually be deprecated",
+                "type": "integer"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/lists/{list-id}": {
+      "get": {
+        "operationId": "readList",
+        "summary": "Fetch a list",
+        "description": "Fetch a list",
+        "parameters": [{
+          "name": "list-id",
+          "in": "path",
+          "description": "ID of list to fetch",
+          "required": true,
+          "type": "integer"
+        }, {
+          "name": "embed",
+          "in": "query",
+          "description": "List of related objects to embed",
+          "required": false,
+          "type": "array",
+          "collectionFormat": "csv",
+          "items": {
+            "type": "string",
+            "enum": [
+              "categories",
+              "categories.materials",
+              "categories.materials.tags",
+              "owners",
+              "ancestors",
+              "descendants"
+            ]
+          }
+        }, {
+          "name": "inheritance",
+          "in": "query",
+          "description": "optionally set inheritance, true by default",
+          "required": false,
+          "type": "boolean"
+        }, {
+          "name": "fields",
+          "in": "query",
+          "description": "optionally limit which fields are returned",
+          "required": false,
+          "type": "array",
+          "collectionFormat": "csv",
+          "items": {
+            "type": "string",
+            "enum": [
+              "FIXME"
+            ]
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/list"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "updateList",
+        "summary": "Update a list",
+        "description": "Update a list",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "list-update"
+        ],
+        "parameters": [{
+          "name": "list-id",
+          "in": "path",
+          "description": "ID of list to update",
+          "required": true,
+          "type": "integer"
+        }, {
+          "name": "data",
+          "in": "body",
+          "description": "Replacement list",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/list"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "patchList",
+        "summary": "Alter a list",
+        "description": "Alter a list",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "list-update",
+          "list-read"
+        ],
+        "parameters": [{
+          "name": "list-id",
+          "in": "path",
+          "description": "ID of list to fetch",
+          "required": true,
+          "type": "integer"
+        }, {
+          "name": "data",
+          "in": "body",
+          "description": "Patch a list",
+          "required": true,
+          "schema": {
+            "$ref": "http://json.schemastore.org/json-patch"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteList",
+        "summary": "Delete a list",
+        "description": "Delete a list",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "list-delete"
+        ],
+        "parameters": [{
+          "name": "list-id",
+          "in": "path",
+          "description": "ID of list to fetch",
+          "required": true,
+          "type": "integer"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/lists/{list-id}/materials/{material-id}/dislike": {
+      "post": {
+        "operationId": "dislikeRating",
+        "summary": "Dislike a material on a list",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "material-rate"
+        ],
+        "parameters": [{
+          "name": "list-id",
+          "in": "path",
+          "description": "ID of list to assign to",
+          "required": true,
+          "type": "integer"
+        }, {
+          "name": "material-id",
+          "in": "path",
+          "description": "ID of material to assign to",
+          "required": true,
+          "type": "integer"
+        }],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Client Error",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          },
+          "403": {
+            "description": "Permissions error",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "undislikeRating",
+        "summary": "Un-dislike a material on a list",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "material-rate"
+        ],
+        "parameters": [{
+          "name": "list-id",
+          "in": "path",
+          "description": "ID of list to assign to",
+          "required": true,
+          "type": "integer"
+        }, {
+          "name": "material-id",
+          "in": "path",
+          "description": "ID of material to assign to",
+          "required": true,
+          "type": "integer"
+        }],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Client Error",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          },
+          "403": {
+            "description": "Permissions error",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          }
+        }
+      }
+    },
+    "/lists/{list-id}/materials/{material-id}/like": {
+      "post": {
+        "operationId": "likeRating",
+        "summary": "Like a material on a list",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "material-rate"
+        ],
+        "parameters": [{
+          "name": "list-id",
+          "in": "path",
+          "description": "ID of list to assign to",
+          "required": true,
+          "type": "integer"
+        }, {
+          "name": "material-id",
+          "in": "path",
+          "description": "ID of material to assign to",
+          "required": true,
+          "type": "integer"
+        }],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Client Error",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          },
+          "403": {
+            "description": "Permissions error",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "unlikeRating",
+        "summary": "Unlike a material on a list",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "material-rate"
+        ],
+        "parameters": [{
+          "name": "list-id",
+          "in": "path",
+          "description": "ID of list to assign to",
+          "required": true,
+          "type": "integer"
+        }, {
+          "name": "material-id",
+          "in": "path",
+          "description": "ID of material to assign to",
+          "required": true,
+          "type": "integer"
+        }],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Client Error",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          },
+          "403": {
+            "description": "Permissions error",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          }
+        }
+      }
+    },
+    "/lists/{list-id}/publish": {
+      "put": {
+        "operationId": "publishList",
+        "summary": "Publish a list",
+        "description": "Publish a list",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "list-publish"
+        ],
+        "parameters": [{
+          "name": "list-id",
+          "in": "path",
+          "description": "ID of list to fetch",
+          "required": true,
+          "type": "integer"
+        }],
+        "responses": {
+          "226": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "published": {
+                  "type": "boolean"
+                },
+                "inherited_published": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "unpublishList",
+        "summary": "Unpublish a list",
+        "description": "Unpublish a list",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "list-publish"
+        ],
+        "parameters": [{
+          "name": "list-id",
+          "in": "path",
+          "description": "ID of list to fetch",
+          "required": true,
+          "type": "integer"
+        }],
+        "responses": {
+          "226": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "published": {
+                  "type": "boolean"
+                },
+                "inherited_published": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          }
+        }
+      }
+    },
+    "/lists/{list-id}/users": {
+      "get": {
+        "operationId": "readUsers",
+        "summary": "Fetch a list of users",
+        "description": "Fetch a list of users, detail depends upon authorization level",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "user-read"
+        ],
+        "parameters": [{
+          "name": "list-id",
+          "in": "path",
+          "description": "List ID to filter users by",
+          "required": true,
+          "type": "integer"
+        }, {
+          "name": "on-lists",
+          "in": "query",
+          "description": "List of list-id's to filter users by",
+          "required": false,
+          "type": "array",
+          "collectionFormat": "csv",
+          "items": {
+            "type": "integer"
+          }
+        }, {
+          "name": "with-list_roles",
+          "in": "query",
+          "description": "List of list-roles to filter users by",
+          "required": false,
+          "type": "array",
+          "collectionFormat": "csv",
+          "items": {
+            "type": "integer"
+          }
+        }, {
+          "name": "embed",
+          "in": "query",
+          "description": "List of related objects to embed",
+          "required": false,
+          "type": "array",
+          "collectionFormat": "csv",
+          "items": {
+            "type": "string",
+            "enum": [
+              "list_roles"
+            ]
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/user"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/lists/{list-id}/users/{user-id}/role/{role-name}/assign": {
+      "post": {
+        "operationId": "assignList",
+        "summary": "Assign a list role to a user",
+        "description": "Assign a list role to a user",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "user-create"
+        ],
+        "parameters": [{
+          "name": "list-id",
+          "in": "path",
+          "description": "ID of list to assign",
+          "required": true,
+          "type": "integer"
+        }, {
+          "name": "user-id",
+          "in": "path",
+          "description": "ID of user to assign to",
+          "required": true,
+          "type": "integer"
+        }, {
+          "name": "role-name",
+          "in": "path",
+          "description": "Name of role to assign",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "204": {
+            "description": "Role exists, no action taken"
+          },
+          "226": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Client Error",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          },
+          "403": {
+            "description": "Permissions error",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "divestList",
+        "summary": "Fetch a list of users",
+        "description": "Fetch a list of users, detail depends upon authorization level",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "user-read"
+        ],
+        "parameters": [{
+          "name": "list-id",
+          "in": "path",
+          "description": "ID of list to assign",
+          "required": true,
+          "type": "integer"
+        }, {
+          "name": "user-id",
+          "in": "path",
+          "description": "ID of user to assign to",
+          "required": true,
+          "type": "integer"
+        }, {
+          "name": "role-name",
+          "in": "path",
+          "description": "Name of role to assign",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "226": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Client Error",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          },
+          "403": {
+            "description": "Permissions error",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          }
+        }
+      }
+    },
+    "/materials": {
+      "post": {
+        "operationId": "createMaterial",
+        "summary": "",
+        "description": "",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "material-create"
+        ],
+        "parameters": [{
+          "name": "data",
+          "in": "body",
+          "description": "Material to add",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/material"
+          }
+        }],
+        "responses": {
+          "201": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/material"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "searchMaterial",
+        "summary": "Request a list of materials",
+        "description": "",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "material-read"
+        ],
+        "parameters": [{
+          "name": "embed",
+          "in": "query",
+          "description": "List of related objects to embed",
+          "required": false,
+          "type": "array",
+          "collectionFormat": "csv",
+          "items": {
+            "type": "string",
+            "enum": [
+              "tags",
+              "occurrences"
+            ]
+          }
+        }, {
+          "name": "in-lists",
+          "in": "query",
+          "description": "List of list-id's to filter material by",
+          "required": false,
+          "type": "array",
+          "collectionFormat": "csv",
+          "items": {
+            "type": "integer"
+          }
+        }, {
+          "name": "in-categories",
+          "in": "query",
+          "description": "List of category-id's to filter material by",
+          "required": false,
+          "type": "array",
+          "collectionFormat": "csv",
+          "items": {
+            "type": "integer"
+          }
+        }, {
+          "name": "is-tagged",
+          "in": "query",
+          "description": "List of tag-id's to filter material by",
+          "type": "array",
+          "collectionFormat": "csv",
+          "items": {
+            "type": "string"
+          }
+        }, {
+          "name": "in-any-list",
+          "in": "query",
+          "description": "Filter on whether the material appears in any lists",
+          "type": "boolean"
+        }, {
+          "name": "search",
+          "in": "query",
+          "description": "Search string to filter material by",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/material"
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          }
+        }
+      }
+    },
+    "/materials/{material-id}": {
+      "get": {
+        "operationId": "readMaterial",
+        "summary": "Request a single material",
+        "description": "",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "material-read"
+        ],
+        "parameters": [{
+          "name": "material-id",
+          "in": "path",
+          "description": "ID of list to fetch",
+          "required": true,
+          "type": "integer"
+        }, {
+          "name": "embed",
+          "in": "query",
+          "description": "List of related objects to embed",
+          "required": false,
+          "type": "array",
+          "collectionFormat": "csv",
+          "items": {
+            "type": "string",
+            "enum": [
+              "tags",
+              "occurrences"
+            ]
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/material"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "updateMaterial",
+        "summary": "Update a material",
+        "description": "",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "material-update"
+        ],
+        "parameters": [{
+          "name": "material-id",
+          "in": "path",
+          "description": "ID of material to update",
+          "required": true,
+          "type": "integer"
+        }, {
+          "name": "data",
+          "in": "body",
+          "description": "Replacement material",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/material"
+          }
+        }, {
+          "name": "related",
+          "in": "query",
+          "description": "Flag whether related objects should be updated",
+          "required": false,
+          "type": "boolean"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/material"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteMaterial",
+        "summary": "",
+        "description": "",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "material-delete"
+        ],
+        "parameters": [{
+          "name": "material-id",
+          "in": "path",
+          "description": "ID of list to fetch",
+          "required": true,
+          "type": "integer"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/materials/{material-id}/frbrize": {
+      "put": {
+        "operationId": "frbrizeMaterial",
+        "summary": "",
+        "description": "Frbrize a material",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "material-update",
+          "list-edit"
+        ],
+        "parameters": [{
+          "name": "material-id",
+          "in": "path",
+          "description": "ID of material to frbrize",
+          "required": true,
+          "type": "integer"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/material"
+            }
+          }
+        }
+      }
+    },
+    "/preferences": {
+      "get": {
+        "operationId": "searchPreference",
+        "summary": "Fetch a list of preferences",
+        "description": "",
+        "parameters": [{
+          "name": "group",
+          "in": "query",
+          "description": "ID of group to filter on",
+          "required": false,
+          "type": "integer"
+        }, {
+          "name": "embed",
+          "in": "query",
+          "description": "List of related objects to embed",
+          "required": false,
+          "type": "array",
+          "collectionFormat": "csv",
+          "items": {
+            "type": "string",
+            "enum": [
+              "schema",
+              "form"
+            ]
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/preference"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/preferences/{pref-code}": {
+      "get": {
+        "operationId": "readPreference",
+        "summary": "Fetch a prefernce",
+        "description": "",
+        "parameters": [{
+          "name": "pref-code",
+          "in": "path",
+          "description": "ID of list to fetch",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "embed",
+          "in": "query",
+          "description": "List of related objects to embed",
+          "required": false,
+          "type": "array",
+          "collectionFormat": "csv",
+          "items": {
+            "type": "string",
+            "enum": [
+              "schema",
+              "form"
+            ]
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/preference"
+            }
+          },
+          "400": {
+            "description": "Client Error",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "updatePreference",
+        "summary": "",
+        "description": "",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "config-update"
+        ],
+        "parameters": [{
+          "name": "pref-code",
+          "in": "path",
+          "description": "ID of list to fetch",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "data",
+          "in": "body",
+          "description": "Preference object to update",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/preference"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/preference"
+            }
+          },
+          "400": {
+            "description": "Client Error",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          },
+          "403": {
+            "description": "Insufficient priviledge",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          }
+        }
+      }
+    },
+    "/ratings": {
+      "get": {
+        "operationId": "readRatings",
+        "summary": "",
+        "description": "",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "rating-read"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/ratings/{material-id}": {
+      "get": {
+        "operationId": "readRating",
+        "summary": "",
+        "description": "",
+        "parameters": [{
+          "name": "material-id",
+          "in": "path",
+          "description": "ID of list to fetch",
+          "required": true,
+          "type": "integer"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/requests": {
+      "post": {
+        "operationId": "createRequest",
+        "summary": "Add a new request",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-privileges": [
+          "request-create"
+        ],
+        "parameters": [{}]
+      },
+      "get": {
+        "operationId": "readRequests",
+        "summary": "Search for requests",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-privileges": [
+          "request-create"
+        ],
+        "parameters": [{}]
+      }
+    },
+    "/roles": {
+      "post": {
+        "operationId": "createRole",
+        "summary": "Add a role",
+        "description": "A a role",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "role-create"
+        ],
+        "parameters": [{
+          "name": "data",
+          "in": "body",
+          "description": "Role object that needs to be added to the store",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/role"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/role"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "readRoles",
+        "summary": "Fetch a role",
+        "description": "Fetch a role",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "parameters": [{
+          "name": "embed",
+          "in": "query",
+          "description": "List of related objects to embed",
+          "required": false,
+          "type": "array",
+          "collectionFormat": "csv",
+          "items": {
+            "type": "string",
+            "enum": [
+              "privileges"
+            ]
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/role"
+            }
+          }
+        }
+      }
+    },
+    "/roles/{role-id}": {
+      "get": {
+        "operationId": "readRole",
+        "summary": "Fetch a role",
+        "description": "Fetch a role",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "parameters": [{
+          "name": "role-id",
+          "in": "path",
+          "description": "ID of list to fetch",
+          "required": true,
+          "type": "integer"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "operationId": "updateRole",
+        "summary": "Update a role",
+        "description": "Update a role",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "role-update"
+        ],
+        "parameters": [{
+          "name": "role-id",
+          "in": "path",
+          "description": "ID of list to fetch",
+          "required": true,
+          "type": "integer"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "patchRole",
+        "summary": "Alter a role",
+        "description": "Alter a role",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "role-update"
+        ],
+        "parameters": [{
+          "name": "role-id",
+          "in": "path",
+          "description": "ID of list to fetch",
+          "required": true,
+          "type": "integer"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteRole",
+        "summary": "Delete a role",
+        "description": "Delete a role",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "role-read",
+          "role-delete"
+        ],
+        "parameters": [{
+          "name": "role-id",
+          "in": "path",
+          "description": "ID of list to fetch",
+          "required": true,
+          "type": "integer"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/tags": {
+      "post": {
+        "operationId": "createTag",
+        "summary": "Add a new tag to the system",
+        "description": "This route allows a user to add new tags to the system.",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "tag-create"
+        ],
+        "parameters": [{
+          "name": "data",
+          "in": "body",
+          "description": "Tag to add",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/tag"
+          }
+        }],
+        "responses": {
+          "201": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/tag"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "readTags",
+        "summary": "Request a list of existing tags",
+        "description": "Request a list of existing tags",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "tag-read"
+        ],
+        "parameters": [{
+          "name": "occurrences",
+          "in": "query",
+          "description": "request occurrences?",
+          "required": false,
+          "type": "boolean"
+        }, {
+          "name": "material",
+          "in": "query",
+          "description": "Search for material filtering on material that contains it",
+          "required": false,
+          "type": "integer"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/tag"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tags/{tag-id}": {
+      "get": {
+        "operationId": "readTag",
+        "summary": "",
+        "description": "",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "tag-read"
+        ],
+        "parameters": [{
+          "name": "tag-id",
+          "in": "path",
+          "description": "ID of list to fetch",
+          "required": true,
+          "type": "integer"
+        }, {
+          "name": "occurrences",
+          "in": "query",
+          "description": "request occurrences?",
+          "required": false,
+          "type": "boolean"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/tag"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "updateTag",
+        "summary": "Update an existing tag",
+        "description": "Alter the text of an existing tag",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "tag-update"
+        ],
+        "parameters": [{
+          "name": "tag-id",
+          "in": "path",
+          "description": "ID of list to fetch",
+          "required": true,
+          "type": "integer"
+        }, {
+          "name": "data",
+          "in": "body",
+          "description": "Tag to add",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/tag"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/tag"
+            }
+          },
+          "400": {
+            "description": "Client error",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "patchTag",
+        "summary": "",
+        "description": "",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "tag-update"
+        ],
+        "parameters": [{
+          "name": "tag-id",
+          "in": "path",
+          "description": "ID of list to fetch",
+          "required": true,
+          "type": "integer"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/tag"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteTag",
+        "summary": "",
+        "description": "",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "tag-delete"
+        ],
+        "parameters": [{
+          "name": "tag-id",
+          "in": "path",
+          "description": "ID of list to fetch",
+          "required": true,
+          "type": "integer"
+        }],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          },
+          "428": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "operationId": "createUser",
+        "summary": "Add a user",
+        "description": "Add a user",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "user-create"
+        ],
+        "parameters": [{
+          "name": "data",
+          "in": "body",
+          "description": "User object that needs to be added to the store",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/user"
+          }
+        }],
+        "x-rebus-required": [
+          "name",
+          "login",
+          "password"
+        ],
+        "responses": {
+          "201": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          },
+          "400": {
+            "description": "Client Error",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          },
+          "403": {
+            "description": "Permissions error",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "searchUsers",
+        "summary": "Fetch a list of users",
+        "description": "Fetch a list of users, detail depends upon authorization level",
+        "x-rebus-priviledges": [
+          "user-read"
+        ],
+        "parameters": [{
+          "name": "on-lists",
+          "in": "query",
+          "description": "List of list-id's to filter users by",
+          "required": false,
+          "type": "array",
+          "collectionFormat": "csv",
+          "items": {
+            "type": "integer"
+          }
+        }, {
+          "name": "with-list_roles",
+          "in": "query",
+          "description": "List of list-roles to filter users by",
+          "required": false,
+          "type": "array",
+          "collectionFormat": "csv",
+          "items": {
+            "type": "integer"
+          }
+        }, {
+          "name": "embed",
+          "in": "query",
+          "description": "List of related objects to embed",
+          "required": false,
+          "type": "array",
+          "collectionFormat": "csv",
+          "items": {
+            "type": "string",
+            "enum": [
+              "list_roles"
+            ]
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/user"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{user-id}": {
+      "get": {
+        "operationId": "readUser",
+        "summary": "Fetch a user",
+        "description": "Fetch a user",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "user-read"
+        ],
+        "parameters": [{
+          "name": "user-id",
+          "in": "path",
+          "description": "ID of user to fetch",
+          "required": true,
+          "type": "integer"
+        }, {
+          "name": "embed",
+          "in": "query",
+          "description": "List of related objects to embed",
+          "required": false,
+          "type": "array",
+          "collectionFormat": "csv",
+          "items": {
+            "type": "string",
+            "enum": [
+              "roles"
+            ]
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "updateUser",
+        "summary": "Update a user",
+        "description": "Update a user",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "user-update"
+        ],
+        "parameters": [{
+          "name": "user-id",
+          "in": "path",
+          "description": "ID of user to update",
+          "required": true,
+          "type": "integer"
+        }, {
+          "name": "data",
+          "in": "body",
+          "description": "User object that needs to be updated",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/user"
+          }
+        }],
+        "x-rebus-required": [
+          "name",
+          "login"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "patchUser",
+        "summary": "Alter a user",
+        "description": "Alter a user",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "user-update"
+        ],
+        "parameters": [{
+          "name": "user-id",
+          "in": "path",
+          "description": "ID of list to fetch",
+          "required": true,
+          "type": "integer"
+        }, {
+          "name": "data",
+          "in": "body",
+          "description": "Patch a buffer",
+          "required": true,
+          "schema": {
+            "$ref": "http://json.schemastore.org/json-patch"
+          }
+        }],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Client error",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "http://git.io/vcKD4#"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteUser",
+        "summary": "Delete a user",
+        "description": "Delete a user",
+        "security": [{
+          "tokenAuth": []
+        }],
+        "x-rebus-priviledges": [
+          "user-read",
+          "user-delete"
+        ],
+        "parameters": [{
+          "name": "user-id",
+          "in": "path",
+          "description": "ID of list to fetch",
+          "required": true,
+          "type": "integer"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "$ref": "./definitions/index.json"
+  },
+  "securityDefinitions": {
+    "tokenAuth": {
+      "type": "apiKey",
+      "name": "tokenAuth",
+      "in": "header"
+    },
+    "basicAuth": {
+      "type": "basic"
+    }
+  }
+}

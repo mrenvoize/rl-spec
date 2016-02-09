@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "title": "rebus:connect - material",
+  "properties": {
+    "frbr": {
+      "type": "string"
+    },
+    "owner_uuid": {
+      "type": "string"
+    },
+    "electronic": {
+      "type": "boolean",
+      "description": "CSL does not natively support electronic materials, thus we flag a material as electronic here"
+    },
+    "csl": {
+      "$ref": "./csl-data.json"
+    }
+  },
+  "required": [
+    "csl",
+    "owner_uuid"
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "type": "object",
+  "title": "rebus:list - material",
+  "description": "A list material",
+  "properties": {
+    "id": {
+      "description": "A system assigned ID",
+      "oneOf": [{
+        "type": "integer",
+        "multipleOf": 1
+      }, {
+        "type": "null"
+      }]
+    },
+    "in_stock": {
+      "oneOf": [{
+        "type": "boolean"
+      }, {
+        "type": "null"
+      }]
+    },
+    "metadata": {
+      "$ref": "./csl-data.json"
+    },
+    "note": {
+      "oneOf": [{
+        "type": "string"
+      }, {
+        "type": "null"
+      }]
+    },
+    "owner": {
+      "type": "string"
+    },
+    "owner_uuid": {
+      "oneOf": [{
+        "type": "string"
+      }, {
+        "type": "integer",
+        "multipleOf": 1,
+        "minimum": 1
+      }, {
+        "type": "null"
+      }]
+    },
+    "tags_global": {
+      "type": "array",
+      "items": {
+        "$ref": "./tag.json"
+      }
+    },
+    "tags_local": {
+      "type": "array",
+      "items": {
+        "$ref": "./tag.json"
+      }
+    },
+    "selected": {
+      "type": "boolean"
+    },
+    "frbr_equivilents": {
+      "type": "array",
+      "items": {
+        "$ref": "./material.json"
+      }
+    },
+    "list_alternatives": {
+      "type": "array",
+      "items": {
+        "$ref": "./material.json"
+      }
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "id",
+    "metadata",
+    "owner",
+    "owner_uuid"
+  ]
+}

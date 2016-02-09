@@ -1,0 +1,23 @@
+{
+  "Last-Modified": {
+    "description": "Last modified date",
+    "type": "string",
+    "format": "dateTime"
+  },
+  "X-Modified-By": {
+    "description": "Last modified by",
+    "type": "string"
+  },
+  "X-Moderation-Requested": {
+    "description": "Moderation requested",
+    "type": "boolean"
+  },
+  "X-Locked-By": {
+    "description": "Locked by",
+    "type": "string"
+  },
+  "X-Version": {
+    "description": "Buffer version",
+    "type": "integer"
+  }
+}

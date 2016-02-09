@@ -1,0 +1,193 @@
+{
+  "type": "object",
+  "title": "rebus:list - list",
+  "description": "The list schema for rebus:list; used for creation and update of reading list objects.",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "description": "System assigned unique identifier; When POSTing a new list this should be set to 'null'",
+      "anyOf": [{
+        "type": "integer",
+        "multipleOf": 1
+      }, {
+        "type": "null"
+      }]
+    },
+    "type": {
+      "description": "?? NOT ENTIRELY SURE WHAT THIS IS FOR ??",
+      "type": "string"
+    },
+    "name": {
+      "description": "A meta-field to give a list a name",
+      "type": "string",
+      "minLength": 1
+    },
+    "summary": {
+      "description": "A verbose meta-field to describe the list content",
+      "anyOf": [{
+        "type": "string",
+        "minLength": 1
+      }, {
+        "type": "null"
+      }]
+    },
+    "public_note": {
+      "description": "A publically visible list level note",
+      "anyOf": [{
+        "type": "string",
+        "minLength": 1
+      }, {
+        "type": "null"
+      }]
+    },
+    "private_note": {
+      "description": "A buffer visible list level note",
+      "anyOf": [{
+        "type": "string",
+        "minLength": 1
+      }, {
+        "type": "null"
+      }]
+    },
+    "course_identifier": {
+      "description": "A list meta-field, used to help identify the list",
+      "anyOf": [{
+        "type": "string"
+      }, {
+        "type": "null"
+      }]
+    },
+    "year": {
+      "description": "A list meta-field used in rollover",
+      "anyOf": [{
+        "type": "integer",
+        "minLength": 4
+      }, {
+        "type": "null"
+      }]
+    },
+    "no_students": {
+      "description": "Used in conjunction with ratio_books and ration_students to construct purchasing predictions.",
+      "anyOf": [{
+        "type": "integer"
+      }, {
+        "type": "null"
+      }]
+    },
+    "ratio_books": {
+      "description": "Used in conjunction with no_students and ration_students to construct purchasing predictions.",
+      "anyOf": [{
+        "type": "integer"
+      }, {
+        "type": "null"
+      }]
+    },
+    "ratio_students": {
+      "description": "Used in conjunction with ratio_books and no_students to construct purchasing predications.",
+      "anyOf": [{
+        "type": "integer"
+      }, {
+        "type": "null"
+      }]
+    },
+    "published": {
+      "type": "boolean",
+      "description": "A read only meta-field reflecting the published status of the list"
+    },
+    "validity_start": {
+      "description": "Used in conjunction with published state to restrict which lists are publicly available at a given time.",
+      "anyOf": [{
+        "type": "string",
+        "format": "date-time"
+      }, {
+        "type": "null"
+      }]
+    },
+    "validity_end": {
+      "description": "Used in conjunction with published state to restrict which lists are publicly available at a given time.",
+      "anyOf": [{
+        "type": "string",
+        "format": "date-time"
+      }, {
+        "type": "null"
+      }]
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "parent_id": {
+      "description": "The ID of the lists parent record. Used to construct the taxonomy.",
+      "anyOf": [{
+        "type": "integer"
+      }, {
+        "type": "null"
+      }]
+    },
+    "source": {
+      "anyOf": [{
+        "type": "string",
+        "minLength": 1
+      }, {
+        "type": "null"
+      }]
+    },
+    "moderating": {
+      "type": "boolean"
+    },
+    "wip": {
+      "type": "boolean"
+    },
+    "user_roles": {
+      "description": "suedo field to show current users roles on the list",
+      "type": "array",
+      "items": {
+          "type": "string"
+      }
+    },
+    "material_count": {
+      "type": "integer"
+    },
+    "categories": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": false,
+      "additionalItems": true,
+      "items": {
+        "$ref": "./category.json"
+      }
+    },
+    "ancestors": {
+      "type": "array",
+      "items": {
+        "$ref": "./list.json"
+      }
+    },
+    "descendants": {
+      "type": "array",
+      "items": {
+        "$ref": "./list.json"
+      }
+    },
+    "users": {
+      "type": "array",
+      "items": {
+        "$ref": "./user.json"
+      }
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "summary",
+    "public_note",
+    "course_identifier",
+    "year",
+    "source",
+    "parent_id"
+  ]
+}

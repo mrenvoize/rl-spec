@@ -1,0 +1,36 @@
+{
+    "type": "object",
+    "title": "rebus:list - category",
+    "description": "A category within a rebus:list list",
+    "properties": {
+        "id": {
+            "description": "System assigned ID",
+            "type": "integer",
+            "minLength": 1
+        },
+        "category": {
+            "description": "Category title",
+            "type": "string",
+            "minLength": 1
+        },
+        "rank": {
+            "description": "Category ordering",
+            "type": "integer"
+        },
+        "source": {
+            "description": "Category source",
+            "type": "string"
+        },
+        "materials": {
+            "type": "array",
+            "items": {
+                "$ref": "./material.json"
+            }
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "id",
+        "category"
+    ]
+}
