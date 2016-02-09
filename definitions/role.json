@@ -1,45 +1,30 @@
 {
   "title": "rebus:list - role",
   "description": "The role schema for rebus:list; used for creation and update of role objects.",
-  "oneOf": [{
-    "type": "object",
-    "properties": {
-      "id": {
-        "$ref": "./rebus-id.json"
-      },
-      "name": {
-        "description": "Enter role name here",
-        "type": "string"
-      },
-      "type": {
-        "description": "Role type",
-        "enum": [
-          "system",
-          "list"
-        ]
-      },
-      "privileges": {
-        "$ref": "./privilege.json"
-      }
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "./rebus-id.json"
     },
-    "additionalProperties": false,
-    "required": [
-      "id",
-      "name",
-      "type"
-    ]
-  }, {
-    "type": "object",
-    "properties": {
-      "lists": {
-        "type": "array",
-        "items": {}
-      },
-      "role": {
-        "type": "string"
-      }
+    "name": {
+      "description": "Enter role name here",
+      "type": "string"
+    },
+    "type": {
+      "description": "Role type",
+      "enum": [
+        "system",
+        "list"
+      ]
+    },
+    "privileges": {
+      "$ref": "./privilege.json"
     }
-  }, {
-    "type": "string"
-  }]
+  },
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "name",
+    "type"
+  ]
 }

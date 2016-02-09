@@ -53,7 +53,27 @@
               "$ref": "#/definitions/list"
             },
             "headers": {
-              "$ref": "#/definitions/buffer-header"
+              "Last-Modified": {
+                "description": "Last modified date",
+                "type": "string",
+                "format": "dateTime"
+              },
+              "X-Modified-By": {
+                "description": "Last modified by",
+                "type": "string"
+              },
+              "X-Moderation-Requested": {
+                "description": "Moderation requested",
+                "type": "boolean"
+              },
+              "X-Locked-By": {
+                "description": "Locked by",
+                "type": "string"
+              },
+              "X-Version": {
+                "description": "Buffer version",
+                "type": "integer"
+              }
             }
           },
           "201": {
@@ -62,7 +82,27 @@
               "$ref": "#/definitions/list"
             },
             "headers": {
-              "$ref": "#/definitions/buffer-header"
+              "Last-Modified": {
+                "description": "Last modified date",
+                "type": "string",
+                "format": "dateTime"
+              },
+              "X-Modified-By": {
+                "description": "Last modified by",
+                "type": "string"
+              },
+              "X-Moderation-Requested": {
+                "description": "Moderation requested",
+                "type": "boolean"
+              },
+              "X-Locked-By": {
+                "description": "Locked by",
+                "type": "string"
+              },
+              "X-Version": {
+                "description": "Buffer version",
+                "type": "integer"
+              }
             }
           },
           "404": {
@@ -111,16 +151,56 @@
           "204": {
             "description": "OK",
             "headers": {
-              "$ref": "#/definitions/buffer-header"
+              "Last-Modified": {
+                "description": "Last modified date",
+                "type": "string",
+                "format": "dateTime"
+              },
+              "X-Modified-By": {
+                "description": "Last modified by",
+                "type": "string"
+              },
+              "X-Moderation-Requested": {
+                "description": "Moderation requested",
+                "type": "boolean"
+              },
+              "X-Locked-By": {
+                "description": "Locked by",
+                "type": "string"
+              },
+              "X-Version": {
+                "description": "Buffer version",
+                "type": "integer"
+              }
             }
           },
           "226": {
             "description": "OK",
+            "headers": {
+              "Last-Modified": {
+                "description": "Last modified date",
+                "type": "string",
+                "format": "dateTime"
+              },
+              "X-Modified-By": {
+                "description": "Last modified by",
+                "type": "string"
+              },
+              "X-Moderation-Requested": {
+                "description": "Moderation requested",
+                "type": "boolean"
+              },
+              "X-Locked-By": {
+                "description": "Locked by",
+                "type": "string"
+              },
+              "X-Version": {
+                "description": "Buffer version",
+                "type": "integer"
+              }
+            },
             "schema": {
               "$ref": "http://json.schemastore.org/json-patch"
-            },
-            "headers": {
-              "$ref": "#/definitions/buffer-header"
             }
           },
           "400": {
