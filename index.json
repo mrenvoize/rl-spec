@@ -1621,8 +1621,7 @@
         }],
         "x-rebus-privileges": [
           "request-create"
-        ],
-        "parameters": [{}]
+        ]
       },
       "get": {
         "operationId": "readRequests",
@@ -1632,8 +1631,7 @@
         }],
         "x-rebus-privileges": [
           "request-create"
-        ],
-        "parameters": [{}]
+        ]
       }
     },
     "/roles": {
