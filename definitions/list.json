@@ -103,7 +103,6 @@
       "type": "array",
       "minItems": 1,
       "uniqueItems": false,
-      "additionalItems": true,
       "items": {
         "$ref": "./category.json"
       }
