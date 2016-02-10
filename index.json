@@ -138,6 +138,9 @@
           "description": "Patch a buffer",
           "required": true,
           "schema": {
+            "type": "object"
+          },
+          "x-json-schema": {
             "$ref": "http://json.schemastore.org/json-patch"
           }
         }, {
@@ -200,6 +203,9 @@
               }
             },
             "schema": {
+              "type": "object"
+            },
+            "x-json-schema": {
               "$ref": "http://json.schemastore.org/json-patch"
             }
           },
@@ -767,6 +773,9 @@
           "description": "Patch a list",
           "required": true,
           "schema": {
+            "type": "object"
+          },
+          "x-json-schema": {
             "$ref": "http://json.schemastore.org/json-patch"
           }
         }],
@@ -1701,7 +1710,12 @@
         }],
         "x-rebus-privileges": [
           "request-create"
-        ]
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       },
       "get": {
         "operationId": "readRequests",
@@ -1711,7 +1725,12 @@
         }],
         "x-rebus-privileges": [
           "request-create"
-        ]
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/roles": {
@@ -1767,9 +1786,11 @@
         "responses": {
           "200": {
             "description": "OK",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/role"
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/role"
+              }
             }
           }
         }
@@ -2294,6 +2315,9 @@
           "description": "Patch a buffer",
           "required": true,
           "schema": {
+            "type": "object"
+          },
+          "x-json-schema": {
             "$ref": "http://json.schemastore.org/json-patch"
           }
         }],
