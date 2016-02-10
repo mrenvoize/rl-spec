@@ -12,7 +12,11 @@
       "description": "Preference value"
     },
     "json_schema": {
-      "$ref": "http://json-schema.org/schema"
+      "description": "A json-schema for the preferences form",
+      "type": "object",
+      "x-json-schema": {
+        "$ref": "http://json-schema.org/schema"
+      }
     },
     "json_form": {
       "description": "Preference form",
